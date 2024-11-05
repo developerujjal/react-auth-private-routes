@@ -4,7 +4,7 @@ import { AuthenticationContext } from "../AuthContext/AuthContext";
 
 const SignUp = () => {
 
-    const { setUser, createUser } = useContext(AuthenticationContext)
+    const { createUser } = useContext(AuthenticationContext)
 
     const handleSignUp = (e) => {
         e.preventDefault()
@@ -13,7 +13,15 @@ const SignUp = () => {
         const password = e.target.password.value;
 
         console.log(name, email, password);
-       
+
+        createUser(email, password)
+            .then(userCredential => {
+                const user = userCredential.user;
+                console.log(user)
+            })
+            .catch(error => {
+                console.error(error)
+            })
     }
 
 

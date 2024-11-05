@@ -11,6 +11,7 @@ import Home from './components/Pages/Home';
 import LogIn from './components/Pages/LogIn';
 import SignUp from './components/Pages/SignUp';
 import AuthContext from './components/AuthContext/AuthContext';
+import Display from './components/Pages/Display';
 
 
 const router = createBrowserRouter([
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: '/signup',
         element: <SignUp />
+      },
+      {
+        path: '/display',
+        element: <Display />
       }
     ]
   }

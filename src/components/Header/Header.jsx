@@ -1,6 +1,24 @@
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthenticationContext } from "../AuthContext/AuthContext";
+import { signOut } from "firebase/auth";
+import auth from "../firebase/firebase.config";
 
 const Header = () => {
+
+    const { user, setUser } = useContext(AuthenticationContext)
+
+    const handleLogOut = () => {
+        signOut(auth)
+            .then(() => {
+                console.log("Sign-out successful.")
+                setUser(null)
+            })
+            .catch(error => {
+                console.error(error)
+            })
+    }
+
     return (
         <header className='flex shadow-md py-4 px-4 sm:px-10 bg-white font-[sans-serif] min-h-[70px] tracking-wide relative z-50'>
             <div className='flex flex-wrap items-center justify-between gap-5 w-full'>
@@ -34,7 +52,8 @@ const Header = () => {
                             className='hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]'>Team</NavLink>
                         </li>
                         <li className='max-lg:border-b border-gray-300 max-lg:py-3 px-3'><NavLink
-                            className='hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]'>Feature</NavLink>
+                            to={'/display'}
+                            className='hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]'>Display</NavLink>
                         </li>
                         <li className='max-lg:border-b border-gray-300 max-lg:py-3 px-3'><NavLink
                             className='hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]'>Blog</NavLink>
@@ -49,9 +68,17 @@ const Header = () => {
                 </div>
 
                 <div className='flex max-lg:ml-auto space-x-3'>
-                    <Link
-                        to={'/login'}
-                        className='px-4 py-2 text-sm rounded-full font-bold text-white border-2 border-[#007bff] bg-[#007bff] transition-all ease-in-out duration-300 hover:bg-transparent hover:text-[#007bff]'>Login</Link>
+                    {
+                        user ?
+                            <Link
+                                onClick={handleLogOut}
+                                className='px-4 py-2 text-sm rounded-full font-bold text-white border-2 border-[#007bff] bg-[#007bff] transition-all ease-in-out duration-300 hover:bg-transparent hover:text-[#007bff]'>Log Out</Link> :
+
+                            <Link
+                                to={'/login'}
+                                className='px-4 py-2 text-sm rounded-full font-bold text-white border-2 border-[#007bff] bg-[#007bff] transition-all ease-in-out duration-300 hover:bg-transparent hover:text-[#007bff]'>Login</Link>
+                    }
+
                     <Link
                         to={'/signup'}
                         className='px-4 py-2 text-sm rounded-full font-bold text-white border-2 border-[#007bff] bg-[#007bff] transition-all ease-in-out duration-300 hover:bg-transparent hover:text-[#007bff]'>Sign

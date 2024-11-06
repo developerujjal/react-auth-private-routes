@@ -1,8 +1,3 @@
-# React + Vite
+# Private Routes Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project is for practice purposes. It demonstrates how to create private routes in a React application. Private routes are sections of the app that only logged-in users can access, providing a secure way to restrict certain pages or features. This setup includes user authentication and redirection to ensure that only authorized users can view protected content.

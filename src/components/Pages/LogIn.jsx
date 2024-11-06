@@ -1,10 +1,15 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { AuthenticationContext } from "../AuthContext/AuthContext";
 
 const LogIn = () => {
 
-    const { signInUser } = useContext(AuthenticationContext);
+    const { user, signInUser } = useContext(AuthenticationContext);
+    const navigate = useNavigate()
+
+    if (user) {
+        return <Navigate to={'/'}></Navigate>
+    }
 
     const handleLogIn = (e) => {
         e.preventDefault()
@@ -13,10 +18,13 @@ const LogIn = () => {
 
         console.log(email, password)
 
+
         signInUser(email, password)
             .then(userCredential => {
                 const user = userCredential.user;
                 console.log(user)
+                e.target.reset()
+                navigate('/')
             })
             .catch(error => {
                 console.error(error)

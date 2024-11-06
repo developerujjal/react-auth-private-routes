@@ -1,15 +1,13 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthenticationContext } from "../AuthContext/AuthContext";
-import { signOut } from "firebase/auth";
-import auth from "../firebase/firebase.config";
 
 const Header = () => {
 
-    const { user, setUser } = useContext(AuthenticationContext)
+    const { user, setUser, logOut } = useContext(AuthenticationContext)
 
     const handleLogOut = () => {
-        signOut(auth)
+        logOut()
             .then(() => {
                 console.log("Sign-out successful.")
                 setUser(null)
@@ -48,9 +46,12 @@ const Header = () => {
                             <NavLink to={'/'}
                                 className='hover:text-[#007bff] text-[#007bff] block font-semibold text-[15px]'>Home</NavLink>
                         </li>
+
                         <li className='max-lg:border-b border-gray-300 max-lg:py-3 px-3'><NavLink
-                            className='hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]'>Team</NavLink>
+                            to={'/history'}
+                            className='hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]'>History</NavLink>
                         </li>
+
                         <li className='max-lg:border-b border-gray-300 max-lg:py-3 px-3'><NavLink
                             to={'/display'}
                             className='hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]'>Display</NavLink>
@@ -61,9 +62,14 @@ const Header = () => {
                         <li className='max-lg:border-b border-gray-300 max-lg:py-3 px-3'><NavLink
                             className='hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]'>About</NavLink>
                         </li>
-                        <li className='max-lg:border-b border-gray-300 max-lg:py-3 px-3'><NavLink
-                            className='hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]'>Contact</NavLink>
-                        </li>
+                        {
+                            user && (
+                                <li className='max-lg:border-b border-gray-300 max-lg:py-3 px-3'><NavLink
+                                to={'/profile'}
+                                    className='hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]'>Profile</NavLink>
+                                </li>
+                            )
+                        }
                     </ul>
                 </div>
 

@@ -12,6 +12,9 @@ import LogIn from './components/Pages/LogIn';
 import SignUp from './components/Pages/SignUp';
 import AuthContext from './components/AuthContext/AuthContext';
 import Display from './components/Pages/Display';
+import History from './components/Pages/History';
+import PrivateRoutes from './PrivateRoutes/PrivateRoutes';
+import Profile from './components/Pages/Profile';
 
 
 const router = createBrowserRouter([
@@ -34,6 +37,13 @@ const router = createBrowserRouter([
       {
         path: '/display',
         element: <Display />
+      }, {
+        path: '/history',
+        element: <PrivateRoutes><History /></PrivateRoutes>
+      },
+      {
+        path: '/profile',
+        element: <PrivateRoutes><Profile /></PrivateRoutes>
       }
     ]
   }

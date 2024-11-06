@@ -4,7 +4,7 @@ import { AuthenticationContext } from "../AuthContext/AuthContext";
 
 const LogIn = () => {
 
-    const { user, signInUser } = useContext(AuthenticationContext);
+    const { user, signInUser, googleSignIn } = useContext(AuthenticationContext);
     const navigate = useNavigate()
 
     if (user) {
@@ -30,6 +30,18 @@ const LogIn = () => {
                 console.error(error)
             })
 
+    }
+
+
+    const handleGoogleLogIn = () => {
+        googleSignIn()
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+            })
+            .catch(error => {
+                console.error(error)
+            })
     }
 
 
@@ -94,6 +106,7 @@ const LogIn = () => {
 
                             <div className="space-x-6 flex justify-center mt-6">
                                 <button type="button"
+                                    onClick={handleGoogleLogIn}
                                     className="border-none outline-none">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="32px" className="inline" viewBox="0 0 512 512">
                                         <path fill="#fbbd00"
